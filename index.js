@@ -94,12 +94,13 @@ async function run() {
         app.get("/patientAppointments", verifyJwt, async (req, res) => {
             const email = req.query.email;
             const date = req.query.date;
-
+            console.log(email,date);
             const decodedEmail = req.decoded.email;
             if (email !== decodedEmail) {
                 return res.status(403).send({ message: "forbidden access" })
             };
 
+            console.log(email,date,decodedEmail);
             const filterOnDate = {
                 patientEmail: email,
                 appointmentDate: date,
@@ -278,5 +279,5 @@ app.get('/', (req, res) => {
 });
 
 app.listen(port, () => {
-    console.log(`hospital server code running on ${port} `);
+    console.log(`hospital server is running on ${port} `);
 })
